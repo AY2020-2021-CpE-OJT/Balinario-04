@@ -19,6 +19,15 @@ MongoClient.connect('mongodb+srv://baluser:balpass@cluster0.knyif.mongodb.net/my
             res.send(result);
         });
     });
+    //Get by ID
+    app.get("/personnel/:id", (request, response) => {
+        collection.findOne({ "_id": new ObjectId(request.params.id) }, (error, result) => {
+            if(error) {
+                return response.status(500).send(error);
+            }
+            response.send(result);
+        });
+    });
 
     //Post Data
     app.post('/data', (req, res) => {
